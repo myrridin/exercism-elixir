@@ -9,7 +9,7 @@ defmodule Teenager do
   end
 
   defp yelling?(input) do
-    String.upcase(input) == input && Regex.run(~r/[^\W\d_]/, input)
+    String.upcase(input) == input && Regex.match?(~r/[^\W\d_]/u, input)
   end
 
   defp question?(input) do
