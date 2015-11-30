@@ -10,11 +10,7 @@ defmodule School do
   """
   @spec add(Dict.t, String.t, pos_integer) :: Dict.t
   def add(db, name, grade) do
-    if students = db[grade] do
-      Dict.put(db, grade, students ++ [name])
-    else
-      Dict.put(db, grade, [name])
-    end
+    Dict.update(db, grade, [name], fn(students) -> [name | students] end)
   end
 
   @doc """
@@ -22,7 +18,7 @@ defmodule School do
   """
   @spec grade(Dict.t, pos_integer) :: [String]
   def grade(db, grade) do
-    db[grade] || []
+    Dict.get(db, grade, [])
   end
 
   @doc """
